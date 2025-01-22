@@ -25,6 +25,9 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt  # Install required libraries
+      - name: Install Ollama
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
 
       - name: Run Python script to generate and insert blog post
         env:
