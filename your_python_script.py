@@ -1,7 +1,7 @@
 import mysql.connector
 import os
 from datetime import datetime
-
+import requests
 # Fetch MySQL credentials from environment variables
 mysql_host = os.getenv('MYSQL_HOST')
 mysql_user = os.getenv('MYSQL_USER')
