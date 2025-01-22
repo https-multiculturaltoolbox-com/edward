@@ -1,0 +1,37 @@
+name: Generate and Insert Blog Post
+
+on:
+  # Trigger the workflow on push to the main branch
+  push:
+    branches:
+      - main
+  # Optionally, you can set it to run on a schedule, e.g., every Monday at midnight:
+  schedule:
+    - cron: '0 0 * * MON'  # Runs every Monday at midnight UTC
+
+jobs:
+  generate_post:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2  # Check out the repository code to the runner
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'  # You can specify a specific Python version like 3.8 or 3.9
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt  # Install required libraries
+
+      - name: Run Python script to generate and insert blog post
+        env:
+          MYSQL_HOST: ${{ secrets.MYSQL_HOST }}  # MySQL host IP (stored in GitHub Secrets)
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}  # MySQL username (stored in GitHub Secrets)
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}  # MySQL password (stored in GitHub Secrets)
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}  # MySQL database name (stored in GitHub Secrets)
+        run: |
+          python your_python_script.py  # Replace with the name of your Python script
+
