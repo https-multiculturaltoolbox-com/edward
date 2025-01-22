@@ -4,16 +4,7 @@ import os
 from datetime import datetime
 
 def generate_content(prompt):
-    result = subprocess.run(
-        ["ollama", "run", "llama3", prompt],  # Calls Ollama's model (llama3)
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True
-    )
-    if result.returncode != 0:
-        raise Exception(f"Error generating content: {result.stderr.strip()}")
-    response = result.stdout.strip()
-    return response
+    return prompt
 
 # Function to insert generated blog post content into MySQL
 def insert_blog_post_to_db(title, summary, content, keywords, slug, thumbnail):
