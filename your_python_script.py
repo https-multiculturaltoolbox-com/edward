@@ -3,7 +3,6 @@ import subprocess
 import os
 from datetime import datetime
 
-# Function to generate blog content using Ollama (llama3 model)
 def generate_content(prompt):
     result = subprocess.run(
         ["ollama", "run", "llama3", prompt],  # Calls Ollama's model (llama3)
